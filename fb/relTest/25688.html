@@ -1,0 +1,293 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<title>FriendsSelector.php - Facebook Custom Friends Selector - PHP Classes</title>
+<link rel="stylesheet" type="text/css" href="http://files.phpclasses.org/themes/igd01/styles.css" title="presentation styles">
+<link rel="shortcut icon" href="http://files.phpclasses.org/graphics/phpclasses/favicon.ico">
+<link rel="alternate" href="http://feeds.feedburner.com/phpclasses-xml" type="application/rss+xml" title="Latest published classes">
+<link rel="alternate" href="http://feeds.feedburner.com/phpclassesreviews-xml" type="application/rss+xml" title="Latest published book reviews">
+<link rel="canonical" href="http://www.phpclasses.org/browse/file/25688.html">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="description" lang="en" content="Friends selction custom component for facebook application. FriendsSelector.php This class can be used generate an application that can be used to select friends on Facebook. It generates the necessary HTML, CSS and Javascript to display a list of friends of the current Facebook user...">
+<meta name="robots" content="noodp">
+<script type="text/javascript" src="http://files.phpclasses.org/js/contentLoader.js"></script>
+<script type="text/javascript"><!--
+var cl = new ML.content.contentLoader();
+// --></script>
+<script type="text/javascript"><!--
+
+  var _gaq = _gaq || [];
+  _gaq.push(["_setAccount", "UA-93559-1"]);
+  _gaq.push(["_trackPageview"]);
+
+  (function() {
+    var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+    ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+    var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+// --></script>
+</head>
+<body>
+<div id="userContent"><div id="user"><center><table width="100%" cellpadding="4" cellspacing="0">
+<tr>
+<td width="49.5%"  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><a href="/login.html?page=browse%2Ffile%2F25688.html">Login</a></td>
+<td  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><a href="/register.html?page=browse%2Ffile%2F25688.html">Register</a></td>
+<td width="49.5%"  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+</tr>
+<tr>
+<td colspan="5"  style=" border-style: none" height="6"></td>
+</tr>
+</table>
+</center>
+</div></div>
+
+<div id="MainConteiner">
+    <div id="PageContent">
+      <div id="Top">
+        <div id="logoPHP"><a href="/"><img src="http://files.phpclasses.org/themes/igd01/graphics/logo-phpclasses.png" width="180" height="60" alt="PHP Classes" border="0"></a></div>     
+        <img id="elephpant" alt="elePHPant" src="http://files.phpclasses.org/themes/igd01/graphics/elephpant.png" width="133px" height="117px"> 
+        <div id="logoCompany"><a href="http://www.icontem.com/" target="_blank"><img src="http://files.phpclasses.org/graphics/icontem.png" width="180" height="60" alt="Icontem" border="0"></a></div>
+        <h1>File: FriendsSelector.php</h1> 
+      </div>
+
+<div id="PageInfo">
+      <div id="navigation"><form style="margin: 0px" action="/search.html" method="get">
+<center><table width="100%" cellpadding="4" cellspacing="0">
+<tr>
+<td width="49.5%"  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><a href="/search.html">Search</a> <input type="text" name="words" size="24"> <input type="image" src="http://files.phpclasses.org/themes/igd01/graphics/search.png" align="middle" style="width: 24px; height: 24px"></td>
+<td  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><img src="http://files.phpclasses.org/themes/igd01/graphics/browse.png" width="24" height="24" alt="All class groups" align="middle" border="0"> <a href="/browse/">All class groups</a></td>
+<td  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><img src="http://files.phpclasses.org/themes/igd01/graphics/latest.png" width="24" height="24" alt="Latest entries" align="middle" border="0"> <a href="/browse/latest/latest.html">Latest entries</a></td>
+<td  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><img src="http://files.phpclasses.org/themes/igd01/graphics/top.png" width="24" height="24" alt="Top 10 charts" align="middle" border="0"> <a href="/browse/top/top.html">Top 10 charts</a></td>
+<td  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><img src="http://files.phpclasses.org/themes/igd01/graphics/blog.png" width="24" height="24" alt="Blog" align="middle" border="0"> <a href="/blog/">Blog</a></td>
+<td  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><img src="http://files.phpclasses.org/themes/igd01/graphics/forum.png" width="24" height="24" alt="Forums" align="middle" border="0"> <a href="/discuss/">Forums</a></td>
+<td  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><img src="http://files.phpclasses.org/themes/igd01/graphics/help.png" width="24" height="24" alt="Help FAQ" align="middle" border="0"> <a href="/faq/">Help FAQ</a></td>
+<td width="49.5%"  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+</tr>
+<tr>
+<td colspan="15"  style=" border-style: none" height="6"></td>
+</tr>
+</table>
+</center>
+
+<input type="hidden" name="go_search" value="1">
+</form></div>
+      <div id="recommendpage"><center><table cellspacing="2" cellpadding="0">
+<tr>
+<td class="tabcontent box light"><a href="http://www.phpclasses.org/recommend.html?title=File%3A+FriendsSelector.php&amp;page=%2Fbrowse%2Ffile%2F25688.html">Recommend</a> this page to a friend!</td>
+<td class="box light"><script type="text/javascript" src="http://apis.google.com/js/plusone.js"></script><g:plusone size="medium" href="http://www.phpclasses.org/browse/file/25688.html"></g:plusone></td>
+<td class="box light"><div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:send href="http://www.phpclasses.org/browse/file/25688.html" font="arial"></fb:send></td><td class="box light"><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.phpclasses.org%2Fbrowse%2Ffile%2F25688.html&amp;layout=button_count&amp;show_faces=false&amp;width=60&amp;action=like&amp;font=arial&amp;colorscheme=light" scrolling="no" frameborder="0" style="border-style: none; border-width: 0; overflow:hidden; width: 80px; height: 24px"></iframe></td>
+<td class="box light"><script type="text/javascript"><!--
+cl.addContent({
+	content: '' + '<' + 'a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="phpclasses" data-related="phpclassesearly:News and insights about the PHPClasses site features and the PHP world in general" data-related="jsclasses:Ready to use JavaScript components" data-related="jsclassesearly:News and insights about the JSClasses site features and the JavaScript world in general"' + '>' + '' + '<' + 'img src="http://files.phpclasses.org/themes/igd01/graphics/twitter.png" width="24" height="24" alt="ReTweet" align="middle" border="0"' + '>' + ' ReTweet' + '<' + '/a' + '>' + '' + '<' + '' + 'script type="text/javascript" src="http://platform.twitter.com/widgets.js"' + '>' + '' + '<' + '' + '/script' + '>' + '',
+	inline: true,
+	priority: -1
+});
+// --></script>
+</td>
+<td class="box light"><img src="http://files.phpclasses.org/themes/igd01/graphics/stumbleupon.png" width="24" height="24" alt="Stumble It!" align="middle" border="0"> <a rel="nofollow" target="_blank" href="http://www.stumbleupon.com/submit?title=File%3A+FriendsSelector.php&amp;url=http%3A%2F%2Fwww.phpclasses.org%2Fbrowse%2Ffile%2F25688.html">Stumble It!</a></td>
+<td class="box light"><img src="http://files.phpclasses.org/themes/igd01/graphics/delicious.png" width="24" height="24" alt="Bookmark in del.icio.us" align="middle" border="0"> <a rel="nofollow" target="_blank" href="http://del.icio.us/post?title=File%3A+FriendsSelector.php&amp;url=http%3A%2F%2Fwww.phpclasses.org%2Fbrowse%2Ffile%2F25688.html">Bookmark in del.icio.us</a></td>
+</tr>
+</table></center></div>
+
+      <div id="ads"><div style="text-align: center; margin-top: 12px; margin-bottom: 12px"><div style="float: left"><script type="text/javascript"><!--
+cl.addContent({
+	content: '' + '<' + '' + 'script type="text/javascript"' + '>' + '' + '<' + '!--\ndocument.write(unescape(\'%3C\')+\'script type="text/javascript" src="http://www.phpclasses.org/tips.html?banner=120x60&amp;r=\' + parseInt((new Date()).getTime() / 60000) + \'"\'+unescape(\'%3E\')+unescape(\'%3C\')+\'/script\'+unescape(\'%3E\'));\n// --' + '>' + '' + '<' + '' + '/script' + '>' + '',
+	inline: true,
+	width: 120,
+	height: 60
+});
+// --></script>
+</div><div style="float: right"><script type="text/javascript"><!--
+cl.addContent({
+	content: '' + '<' + 'iframe id="IFrameZone3" name="IFrameZone3" src="http://www.phpclasses.org/adframe.php?what=zone:3&amp;n=a1475149434" width="120" height="60" marginwidth="0" marginheight="0" frameborder="0" scrolling="no"' + '>' + '\n       ' + '<' + '' + 'script type="text/javascript"' + '>' + '' + '<' + '!--\n         randNum = ((new Date()).getTime() % 2147483648) + Math.random();\n         document.write(\n           unescape("%3C")+"a href=\"http://www.phpclasses.org/adclick.php?what=zone:3&n=a" + randNum + "\" + unescape("%3E") +\n           unescape("%3C")+"img src=\"http://www.phpclasses.org/adview.php?what=zone:3&n=a" + randNum + "\"" +\n             " width=120 height=60 border=0 alt=\"Click Here\""+unescape("%3E")+unescape("%3C")+"/a"+unescape("%3E"));\n       // --' + '>' + '' + '<' + '' + '/script' + '>' + '\n       ' + '<' + 'noscript' + '>' + '\n           ' + '<' + 'a href="http://www.phpclasses.org/adclick.php?what=zone:3&amp;n=a1475149434" target=_blank' + '>' + '\n           ' + '<' + 'img src="http://www.phpclasses.org/adview.php?what=zone:3&amp;n=a1475149434"\n                width=120 height=60 border=0 alt="Click Here"' + '>' + '' + '<' + '/a' + '>' + '\n       ' + '<' + '/noscript' + '>' + '\n' + '<' + '/iframe' + '>' + '',
+	inline: true,
+	width: 120,
+	height: 60
+});
+// --></script>
+</div><div style="margin-left: auto; margin-right: auto; text-align: center"><script type="text/javascript"><!--
+cl.addContent({
+	content: '' + '<' + '' + 'script type="text/javascript"' + '>' + '' + '<' + '!--\ngoogle_ad_client = "ca-pub-2951707118576741";\n/* PHP Classes Leaderboard */\ngoogle_ad_slot = "5451588426";\ngoogle_ad_width = 728;\ngoogle_ad_height = 90;\n//--' + '>' + '\n' + '<' + '' + '/script' + '>' + '\n' + '<' + '' + 'script type="text/javascript"\nsrc="http://pagead2.googlesyndication.com/pagead/show_ads.js"' + '>' + '\n' + '<' + '' + '/script' + '>' + '\n',
+	inline: true,
+	width: 728,
+	height: 90,
+	priority: 1
+});
+// --></script>
+</div></div><div align="center" style="text-align: center; margin-bottom: 8px"><script type="text/javascript"><!--
+cl.addContent({
+	content: '' + '<' + '' + 'script type="text/javascript"' + '>' + '' + '<' + '!--\n var js=1\n// --' + '>' + '' + '<' + '' + '/script' + '>' + '\n' + '<' + '' + 'script  type="text/javascript" src="http://www.phpclasses.org/adjs.php?zone=horizontal&amp;g=31,97,130"' + '>' + '' + '<' + '' + '/script' + '>' + '' + '<' + '' + 'script type="text/javascript"' + '>' + '' + '<' + '!--\n document.write("' + '<' + '"+"script type=\\"text/javascript\\" src=\\"");\n document.write("/");\n document.write("screen.js?cb=1017257592&amp;s=s");\n if(screen.width)\n  document.write("&amp;w="+screen.width);\n if(screen.height)\n  document.write("&amp;h="+screen.height);\n if(typeof(js)!="undefined")\n  document.write("&amp;js="+js);\n document.write("\\"' + '>' + '" + "' + '<' + '" + "/script' + '>' + '");\n// --' + '>' + '' + '<' + '' + '/script' + '>' + '\n',
+	inline: true,
+	width: 728,
+	height: 15,
+	priority: 1
+});
+// --></script>
+</div></div>
+      <div id="InfoContent"><!-- body_start --><table width="100%" cellpadding="4" cellspacing="0">
+<tr>
+<td width="49.5%" class="nbgu">&nbsp;</td>
+<td class="nbtu light"><a href="/browse/author/668023.html">Classes of Md. Mahmud Ahsan</a></td>
+<td class="nbgu">&nbsp;<b>&gt;</b>&nbsp;</td>
+<td class="nbtu light"><a href="/package/5061-PHP-Select-friends-on-Facebook.html">Facebook Custom Friends Selector</a></td>
+<td class="nbgu">&nbsp;<b>&gt;</b>&nbsp;</td>
+<td class="nblu"><b>FriendsSelector.php</b></td>
+<td width="49.5%" class="nbgu">&nbsp;</td>
+</tr>
+<tr>
+<td colspan="7" class="nbpu" height="6"></td>
+</tr>
+</table>
+<!-- google_ad_section_start --><table width="100%">
+<tr>
+<td style="width: 336px; height: 280px" valign="top"><script type="text/javascript"><!--
+cl.addContent({
+	tags: '' + unescape('%3C') + 'script type="text/javascript"' + unescape('%3E') + '' + unescape('%3C') + '!--\ngoogle_ad_client = "ca-pub-2951707118576741";\n/* PHP Classes below the fold */\ngoogle_ad_slot = "9106526349";\ngoogle_ad_width = 300;\ngoogle_ad_height = 250;\n//--' + unescape('%3E') + '\n' + unescape('%3C') + '/script' + unescape('%3E') + '\n' + unescape('%3C') + 'script type="text/javascript"\nsrc="http://pagead2.googlesyndication.com/pagead/show_ads.js"' + unescape('%3E') + '\n' + unescape('%3C') + '/script' + unescape('%3E') + '\n',
+	inline: false,
+	width: 336,
+	height: 280
+});
+// --></script>
+<script type="text/javascript"><!--
+cl.loadContent();
+// --></script>
+</td>
+<td valign="top"><table cellspacing="0" cellpadding="2" style="width: 100%; height: 280px">
+<TR class="even">
+<TH VALIGN="top" ALIGN=right WIDTH="1%" NOWRAP><!--htdig_noindex-->File<!--/htdig_noindex-->:</TH>
+<TD><TT>FriendsSelector.php</TT></TD>
+</TR>
+<TR class="odd">
+<TH VALIGN="top" ALIGN=right WIDTH="1%" NOWRAP><!--htdig_noindex-->Role<!--/htdig_noindex-->:</TH>
+<TD>Class source</TD>
+</TR>
+<TR class="even">
+<TH VALIGN="top" ALIGN=right WIDTH="1%" NOWRAP><!--htdig_noindex-->Content type<!--/htdig_noindex-->:</TH>
+<TD><TT>text/plain</TT></TD>
+</TR>
+<TR class="odd">
+<TH VALIGN="top" ALIGN=right WIDTH="1%" NOWRAP><!--htdig_noindex-->Description<!--/htdig_noindex-->:</TH>
+<TD>Friends selction custom component for facebook application</TD>
+</TR>
+<TR class="even">
+<TH VALIGN="top" ALIGN=right WIDTH="1%" NOWRAP><!--htdig_noindex-->Class<!--/htdig_noindex-->:</TH>
+<TD><a href="/package/5061-PHP-Select-friends-on-Facebook.html">Facebook Custom Friends Selector</a><br>
+<B>Select friends on Facebook</B></TD>
+</TR>
+<tr style="height: 99%">
+<td colspan="2"><CENTER><P><span class="box light"><B>You need to be a registered user and log in to access this file.</B></span></P></CENTER>
+<CENTER><P><span class="box dark"><B><A TARGET="_blank" HREF="/faq/#register-to-download">Read why you need to register and login to download</A></B></span></P></CENTER>
+<CENTER><table width="100%" cellpadding="4" cellspacing="0">
+<tr>
+<td colspan="5" class="nbpd" height="6"></td>
+</tr>
+<tr>
+<td width="49.5%" class="nbgd">&nbsp;</td>
+<td class="nbtd light"><a href="/login.html?page=browse%2Ffile%2F25688.html">Login</a></td>
+<td class="nbgd">&nbsp;</td>
+<td class="nbtd light"><a href="/register.html?page=browse%2Ffile%2F25688.html">Register</a></td>
+<td width="49.5%" class="nbgd">&nbsp;</td>
+</tr>
+</table>
+</CENTER>
+</TD>
+</TR>
+</table>
+</td>
+</tr>
+</table>
+<!-- google_ad_section_end --><!-- body_end --><script type="text/javascript"><!--
+cl.addContent({
+	content: '' + '<' + 'br' + '>' + '' + '<' + 'center' + '>' + '' + '<' + '' + 'script type="text/javascript"' + '>' + '' + '<' + '!--\ngoogle_ad_client = "ca-pub-2951707118576741";\n/* PHP Classes Bottom */\ngoogle_ad_slot = "0161400320";\ngoogle_ad_width = 728;\ngoogle_ad_height = 90;\n//--' + '>' + '\n' + '<' + '' + '/script' + '>' + '\n' + '<' + '' + 'script type="text/javascript"\nsrc="http://pagead2.googlesyndication.com/pagead/show_ads.js"' + '>' + '\n' + '<' + '' + '/script' + '>' + '\n' + '<' + '/center' + '>' + '\n',
+	inline: true,
+	width: 728,
+	height: 90,
+	priority: 1
+});
+// --></script>
+<script type="text/javascript"><!--
+cl.loadContent();
+// --></script>
+
+</div>
+
+</div>
+
+    </div>
+
+    <div id="Footer">
+      <div id="FooterInfo"><div id="endnavigation"><table width="100%" cellpadding="4" cellspacing="0">
+<tr>
+<td colspan="15"  style=" border-style: none" height="6"></td>
+</tr>
+<tr>
+<td width="49.5%"  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><img src="http://files.phpclasses.org/themes/igd01/graphics/buy.png" width="24" height="24" alt="Advertise on this site" align="middle" border="0"> <a href="/sponsor.html" target="_blank">Advertise on this site</a></td>
+<td  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><img src="http://files.phpclasses.org/themes/igd01/graphics/map.png" width="24" height="24" alt="Site map" align="middle" border="0"> <a href="/sitemap/">Site map</a></td>
+<td  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><img src="http://files.phpclasses.org/themes/igd01/graphics/new.png" width="24" height="24" alt="Newsletter" align="middle" border="0"> <a href="/newsletter/">Newsletter</a></td>
+<td  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><img src="http://files.phpclasses.org/themes/igd01/graphics/statistics.png" width="24" height="24" alt="Statistics" align="middle" border="0"> <a href="/browse/statistics/statistics.html">Statistics</a></td>
+<td  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><img src="http://files.phpclasses.org/themes/igd01/graphics/tip.png" width="24" height="24" alt="Site tips" align="middle" border="0"> <a href="/tips.html">Site tips</a></td>
+<td  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><img src="http://files.phpclasses.org/themes/igd01/graphics/privacy.png" width="24" height="24" alt="Privacy policy" align="middle" border="0"> <a href="/faq/#privacy-policy">Privacy policy</a></td>
+<td  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+<td  style=" white-space: nowrap ;"><img src="http://files.phpclasses.org/themes/igd01/graphics/mail.png" width="24" height="24" alt="Contact" align="middle" border="0"> <a href="/faq/#contact">Contact</a></td>
+<td width="49.5%"  style=" white-space: nowrap ; padding: 1px">&nbsp;</td>
+</tr>
+</table>
+</div>
+        <div id="Copyright"><div>
+<div style="float: left"><address>For more information send a message to :<br>
+<tt><a target="_blank" href="/faq/#contact">info at phpclasses dot org</a></tt>.</address></div>
+<div style="float: right"><table cellpadding="0">
+<tr>
+<td nowrap="nowrap">Copyright (c) <a href="http://www.icontem.com/" target="_blank">Icontem</a> 1999-2011</td>
+<td nowrap="nowrap"><a href="http://www.phpclasses.org/"><b>PHP Classes</b></a></td>
+<td nowrap="nowrap">- <a rel="nofollow" href="http://www.php.net/">PHP</a> Class Scripts</td>
+</tr><tr>
+<td>&nbsp;</td>
+<td nowrap="nowrap"><a href="http://www.phpclasses.org/reviews/"><b>PHP Book Reviews</b></a></td>
+<td nowrap="nowrap">- Reviews of books and other products</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+
+</div>
+
+<div style="display: none">
+<div id="sitemeter"></div>
+<!-- Site Meter -->
+<script type="text/javascript">
+(function()
+{
+	var st = document.createElement('script'); st.type = 'text/javascript'; st.async = true;
+	st.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://') + 'sm5.sitemeter.com/js/counter.asp?site=sm5phpclasses'; 
+	(document.getElementById('sitemeter')).appendChild(st);
+})();
+</script>
+<noscript>
+<a href="http://sm5.sitemeter.com/stats.asp?site=sm5phpclasses" target="_top">
+<img src="http://sm5.sitemeter.com/meter.asp?site=sm5phpclasses" alt="Site Meter" border="0"/></a>
+</noscript>
+<!-- Copyright (c)2009 Site Meter -->
+</div>
+</body>
+</html>
