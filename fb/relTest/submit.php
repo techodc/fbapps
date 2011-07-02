@@ -22,7 +22,7 @@ $q=$_GET["q"];
 $uid=$_GET["user"];
 $response="";
 $db=new db_interact();
-
+echo $uid;
 if (strlen($q) > 0)
 {
 	$delimiter=",";
@@ -33,7 +33,7 @@ if (strlen($q) > 0)
 $response=$response.",".$id;
 		//echo "<b>Split $counter: </b> $id<br>";
 		//$response=$response.$db->saveRelation('12', $id);
-$db->saveRecord('12',$id);		
+$db->saveRecord($uid,$id);		
 	}
 }
 

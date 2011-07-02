@@ -30,6 +30,9 @@ class db_interact
 		//$sql = 'INSERT INTO `techodc`.`Active_A` (`RelationId`, `PrimaryConn`, `SecondaryConn`, `Comments`) VALUES (\'13\', \'14\', \'15\', \'163\');';
 		//mysql_query("INSERT INTO techodc.Active_A (PrimaryConn, SecondaryConn, Comments) VALUES (2973, 374, '35')");
 		mysql_query("INSERT INTO techodc.Active_A (PrimaryConn, SecondaryConn, Comments) VALUES ('.$primPerson.', '.$secondPerson.', '35')");
+		$activeB = 'INSERT INTO `techodc`.`Active_B` (`PrimaryConn`, `SecondaryConn`, `Comments`) 
+		VALUES ('.$secondPerson.', '.$primPerson.', '.'35123'.')';
+		$err=mysql_query($activeB);
 		mysql_close($con);
 
 	}

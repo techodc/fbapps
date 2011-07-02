@@ -99,7 +99,7 @@ function saveCrushes(){
 	    }
 	  }
 		
-	xmlhttp.open("GET","submit.php?q="+crushFrn,true);
+	xmlhttp.open("GET","submit.php?q="+crushFrn+"&user="+<?php echo $user?>,true);
 	xmlhttp.send();
 }
 
