@@ -202,7 +202,7 @@ h1 a:hover {
 		$name=$user_profile[name];
 		echo 'id'.$id;
 		echo 'name  '.$name;
-		$db->saveRecord();
+	//	$db->saveRecord();
 	}
 	else
 	echo 'null connection';

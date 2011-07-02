@@ -19,6 +19,7 @@ $a[]="Vicky";
 
 //get the q parameter from URL
 $q=$_GET["q"];
+$uid=$_GET["user"];
 $response="";
 $db=new db_interact();
 
