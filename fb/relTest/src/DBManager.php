@@ -22,27 +22,32 @@ class db_interact
 		//			}
 
 	}
-	public function saveRecord(){
+	public function saveRecord($primPerson, $secondPerson){
+		
 		$con = mysql_connect("techodc.db.8009021.hostedresource.com","techodc","accORA@8");
-		echo  'inside save record';
+		echo  'inside save record'.$primPerson.$secondPerson;
 		mysql_select_db("my_db", $con);
 		//$sql = 'INSERT INTO `techodc`.`Active_A` (`RelationId`, `PrimaryConn`, `SecondaryConn`, `Comments`) VALUES (\'13\', \'14\', \'15\', \'163\');';
-		mysql_query("INSERT INTO techodc.Active_A (RelationId,PrimaryConn, SecondaryConn, Comments) VALUES (45,23, 34, '35')");
-		mysql_query($sql);
+		//mysql_query("INSERT INTO techodc.Active_A (PrimaryConn, SecondaryConn, Comments) VALUES (2973, 374, '35')");
+		mysql_query("INSERT INTO techodc.Active_A (PrimaryConn, SecondaryConn, Comments) VALUES ('.$primPerson.', '.$secondPerson.', '35')");
 		mysql_close($con);
 
 	}
 	public function saveRelation($primPerson, $secondPerson) {
+				$con = mysql_connect("techodc.db.8009021.hostedresource.com","techodc","accORA@8");
+		
 		mysql_select_db("my_db", $con);
+		$activeA = 'INSERT INTO `techodc`.`Active_A` (`PrimaryConn`, `SecondaryConn`, `Comments`) 
+VALUES ('.$primPerson.', '.$secondPerson.', '.'fb'.')';
+		$activeB = 'INSERT INTO `techodc`.`Active_B` (`PrimaryConn`, `SecondaryConn`, `Comments`) 
+		VALUES ('.$secondPerson.', '.$primPerson.', '.'35123'.')';
+		
+		$err=mysql_query($activeA);
 
-		mysql_query("INSERT INTO Active_A (PrimaryConn, SecondaryConn, Comments)
-VALUES ('.$primPerson.', '.$secondPerson.', '35')");
-
-		mysql_query("INSERT INTO Passive_B (PrimaryConn, SecondaryConn, Comments)
-VALUES ('.$secondPerson.', '.$primPerson.', '35123')");
+		$err=$err.mysql_query($activeB);
 
 		mysql_close($con);
-
+echo $err;
 	}
 }
 ?>

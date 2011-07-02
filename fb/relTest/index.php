@@ -79,6 +79,31 @@ $session =$_SESSION;
                         alert(12);
                   }
             </SCRIPT>
+<script type="text/javascript">
+function saveCrushes(){
+
+	var crushFrn=document.getElementById("frn-list").value;
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+	    document.getElementById("status").innerHTML=xmlhttp.responseText;
+	    }
+	  }
+		
+	xmlhttp.open("GET","submit.php?q="+crushFrn,true);
+	xmlhttp.send();
+}
+
+</script>
 <title>Find Your Crushes</title>
 <style>
 body {
@@ -130,8 +155,9 @@ h1 a:hover {
 						<td><?php $friends = $facebook->api('/me/friends');?> <?php endif;?>
 							<h2>Select Friends on which You have crushes</h2>
 							<div>
-								<input type="text" id="frn-list" name="blah" /> <input
-									type="button" value="Submit" />
+								<input type="text" id="frn-list" name="blah" /> 
+								<input type="button" value="Submit" onclick="saveCrushes();" />
+								<p>Suggestions: <span id="status"></span></p>
 								<script type="text/javascript">
         $(document).ready(function() {
             $("#frn-list").tokenInput([
