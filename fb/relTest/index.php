@@ -1,6 +1,28 @@
 <?php
 require './src/facebook.php';
 require './src/DBManager.php';
+require_once("jqSajax.class.php");
+
+function multiply($var1,$var2){
+	return $var1*$var2;
+}
+
+class myObj{
+	function multiply($var1,$var2){
+		echo $var1*$var2;
+		return $var1*$var2;
+	}
+}
+$page=new  myObj();
+
+//$ajax=new jqSajax(1,1,1); or can be declared as $ajax=new jqSajax();
+$ajax=new jqSajax();//the default jqSajax(1,1,1)
+//$ajax->request_type = "POST";
+//$ajax->debug_mode = 1;
+//$ajax->friendly_url= 1;
+//$ajax->as_method=1;
+$ajax->export("multiply", "page->multiply");//export function
+$ajax->processClientReq();
 
 // app id and secret
 $facebook = new Facebook(array(
@@ -47,6 +69,16 @@ $session =$_SESSION;
 <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.12.custom.min.js"></script>
 <script type="text/javascript" src="js/jquery.tokeninput.js"></script>
+<SCRIPT type="text/javascript">    
+                  function attach_file( p_script_url ) {
+                        // create new script element, set its relative URL, and load it
+                        alert(123);
+                        script = document.createElement( 'script' );
+                        script.src = p_script_url;
+                        document.getElementsByTagName( 'head' )[0].appendChild( script );
+                        alert(12);
+                  }
+            </SCRIPT>
 <title>Find Your Crushes</title>
 <style>
 body {
@@ -63,14 +95,14 @@ h1 a:hover {
 }
 </style>
 </head>
-<script type="text/javascript">
+<!-- script type="text/javascript">
     $(document).ready(function() {
         $("input[type=button]").click(function () {
             alert("Would submit: " + $(this).siblings("input[type=text]").val());
         });
     });
-    </script>
-    
+    </script-->
+
 <body>
 	<h1>Find your Friend-list Crushes</h1>
 	<script>
@@ -86,19 +118,21 @@ h1 a:hover {
 			</ul>
 			<div id="tabs-1">
 			<?php if ($user): ?>
-				<h3>
-					Welcome
-					<?php echo $user_profile[first_name] ?>
-				</h3>
-				<img src="https://graph.facebook.com/<?php echo $user; ?>/picture">
-				<?php $friends = $facebook->api('/me/friends');?>
-
-				<?php endif;?>
-				<h2>Friend on which You have crushes</h2>
-				<div>
-					<input type="text" id="frn-list" name="blah" />
-					<input	type="button" value="Submit" />
-					<script type="text/javascript">
+				<table>
+					<tr>
+						<td width="25%">
+							<h3>
+								Welcome <br>
+								<?php echo $user_profile[first_name] ?>
+							</h3> 
+							<img src="https://graph.facebook.com/<?php echo $user; ?>/picture">
+						</td>
+						<td><?php $friends = $facebook->api('/me/friends');?> <?php endif;?>
+							<h2>Select Friends on which You have crushes</h2>
+							<div>
+								<input type="text" id="frn-list" name="blah" /> <input
+									type="button" value="Submit" />
+								<script type="text/javascript">
         $(document).ready(function() {
             $("#frn-list").tokenInput([
 
@@ -108,12 +142,29 @@ h1 a:hover {
 <?php } }?>
 {id: 47, name: "Java"} ]); });
         </script>
-				</div>
+							</div>
+						</td>
+					</tr>
+				</table>
 
 			</div>
 			<div id="tabs-3">
 				<p>Tab 3 a.</p>
+				<form name="ftest">
+					<ul>
+						<li><input type="text" size="6" id="var1" name="var1" /> * <input
+							type="text" size="6" id="var2" name="var2" /> = <input
+							type="text" id="result" name="result" size="20" /> <input
+							type="button"
+							onsubmit="$('#result').val($.x_page_multiply($('#var1').val(),$('#var2').val()))"
+							title="No action, just to triger onchange event in previous field"
+							value="Count" /></li>
+					</ul>
+				</form>
+
 				<p>Tab 3b.</p>
+				<a href="javascript:attach_file( 'javascript.php' )">What time is
+					it?</a> <br> <br> <span id="dynamic_span" />
 			</div>
 		</div>
 	</div>
