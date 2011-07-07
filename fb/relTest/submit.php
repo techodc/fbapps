@@ -22,7 +22,7 @@ $q=$_GET["q"];
 $uid=$_GET["user"];
 $response="";
 $db=new db_interact();
-echo $uid;
+//echo $uid;
 if (strlen($q) > 0)
 {
 	$delimiter=",";
