@@ -1,33 +1,13 @@
 <?php
 require './src/facebook.php';
 require './src/DBManager.php';
-require_once("jqSajax.class.php");
 
-function multiply($var1,$var2){
-	return $var1*$var2;
-}
-
-class myObj{
-	function multiply($var1,$var2){
-		echo $var1*$var2;
-		return $var1*$var2;
-	}
-}
-$page=new  myObj();
-
-//$ajax=new jqSajax(1,1,1); or can be declared as $ajax=new jqSajax();
-$ajax=new jqSajax();//the default jqSajax(1,1,1)
-//$ajax->request_type = "POST";
-//$ajax->debug_mode = 1;
-//$ajax->friendly_url= 1;
-//$ajax->as_method=1;
-$ajax->export("multiply", "page->multiply");//export function
-$ajax->processClientReq();
-
+$appId='177813092274900';
+$secret='e2a5525597622b3745f64dbe0bc4ae50';
 // app id and secret
 $facebook = new Facebook(array(
-  'appId'  => '177813092274900',
-  'secret' => 'e2a5525597622b3745f64dbe0bc4ae50',
+  'appId'  => $appId,
+  'secret' => $secret,
 ));
 
 // User ID
@@ -53,6 +33,7 @@ if ($user) {
 
 // admin profile.
 $dc= $facebook->api('/deepak.chaudhry');
+
 $session =$_SESSION;
 ?>
 <!doctype html>
@@ -69,16 +50,7 @@ $session =$_SESSION;
 <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.12.custom.min.js"></script>
 <script type="text/javascript" src="js/jquery.tokeninput.js"></script>
-<SCRIPT type="text/javascript">    
-                  function attach_file( p_script_url ) {
-                        // create new script element, set its relative URL, and load it
-                        alert(123);
-                        script = document.createElement( 'script' );
-                        script.src = p_script_url;
-                        document.getElementsByTagName( 'head' )[0].appendChild( script );
-                        alert(12);
-                  }
-            </SCRIPT>
+
 <script type="text/javascript">
 function saveCrushes(){
 
@@ -120,14 +92,6 @@ h1 a:hover {
 }
 </style>
 </head>
-<!-- script type="text/javascript">
-    $(document).ready(function() {
-        $("input[type=button]").click(function () {
-            alert("Would submit: " + $(this).siblings("input[type=text]").val());
-        });
-    });
-    </script-->
-
 <body>
 	<h1>Find your Friend-list Crushes</h1>
 	<script>
