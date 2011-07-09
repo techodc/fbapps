@@ -33,19 +33,31 @@ if ($user) {
 
 // admin profile.
 $dc= $facebook->api('/deepak.chaudhry');
+$token_url = "https://graph.facebook.com/oauth/access_token?" .
+    "client_id=" .$appId.
+    "&client_secret=" .$secret.
+    "&grant_type=client_credentials";
 
+  $app_access_token = file_get_contents($token_url);
+
+  session_start(); 
+$_SESSION['views'] = 1; // store session data
+//echo "Pageviews = ". $_SESSION['views']; //retrieve data
+  
 $session =$_SESSION;
+$session["fb"] = $facebook;
+$_SESSION["uid"]=$user;
+$session["appToken"] = $app_access_token;
+
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link type="text/css" href="css/ui-darkness/jquery-ui-1.8.12.custom.css"
-	rel="Stylesheet" />
+<link rel="Stylesheet" href="css/ui-darkness/jquery-ui-1.8.12.custom.css" type="text/css"/>
 <link rel="stylesheet" href="css/token-input.css" type="text/css" />
-<link rel="stylesheet" href="css/token-input-facebook.css"
-	type="text/css" />
+<link rel="stylesheet" href="css/token-input-facebook.css" type="text/css" />
 
 <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.12.custom.min.js"></script>

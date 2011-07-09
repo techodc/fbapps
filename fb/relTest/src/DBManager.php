@@ -1,7 +1,5 @@
 <?php
 
-
-
 class db_interact
 {
 	/**
@@ -11,7 +9,7 @@ class db_interact
 
 	public $con;
 	public function __construct() {
-		//	$con = mysql_connect("techodc.db.8009021.hostedresource.com","techodc","accORA@8");
+		//$con = mysql_connect("techodc.db.8009021.hostedresource.com","techodc","accORA@8");
 		//if (!$con)
 		//		{
 		//			echo 'couldnt connect';
@@ -23,8 +21,8 @@ class db_interact
 
 	}
 	public function saveRecord($primPerson, $secondPerson){
-
 		$con = mysql_connect("techodc.db.8009021.hostedresource.com","techodc","accORA@8");
+		$returnMsg=0;
 		mysql_select_db("my_db", $con);
 
 		$checkActive="Select * from techodc.Active_main where PrimaryConn=".$primPerson." And SecondaryConn=".$secondPerson;
@@ -36,8 +34,10 @@ class db_interact
 			$insertActive="INSERT INTO techodc.Active_main (PrimaryConn, SecondaryConn, Comments)
 							VALUES ('.$primPerson.', '.$secondPerson.', 'active')";	
 			mysql_query($insertActive);
+			$returnMsg=1;
 		} else{
 			// already exist . provide warning
+			$returnMsg=2;
 		}
 
 		$checkPassive='Select * from techodc.Passive_main where PrimaryConn='.$secondPerson.' And SecondaryConn='.$primPerson;
@@ -49,34 +49,16 @@ class db_interact
 			$insertPassive="INSERT INTO techodc.Passive_main (PrimaryConn, SecondaryConn, Comments)
 							VALUES ('.$secondPerson.', '.$primPerson.', 'passive')";	
 			mysql_query($insertPassive);
+			$returnMsg=3;
 		}
 		else{
-			
+				
 			//insert into relation and send notification
+			$returnMsg=4;
 		}
-		/*
-		 mysql_query("INSERT INTO techodc.Active_A (PrimaryConn, SecondaryConn, Comments) VALUES ('.$primPerson.', '.$secondPerson.', '35')");
-		 $activeB = 'INSERT INTO `techodc`.`Active_B` (`PrimaryConn`, `SecondaryConn`, `Comments`)
-		 VALUES ('.$secondPerson.', '.$primPerson.', '.'35123'.')';
-		 $err=mysql_query($activeB);
-		 mysql_close($con);
-		 */
-	}
-	public function saveRelation($primPerson, $secondPerson) {
-		$con = mysql_connect("techodc.db.8009021.hostedresource.com","techodc","accORA@8");
-
-		mysql_select_db("my_db", $con);
-		$activeA = 'INSERT INTO `techodc`.`Active_A` (`PrimaryConn`, `SecondaryConn`, `Comments`)
-VALUES ('.$primPerson.', '.$secondPerson.', '.'fb'.')';
-		$activeB = 'INSERT INTO `techodc`.`Active_B` (`PrimaryConn`, `SecondaryConn`, `Comments`)
-		VALUES ('.$secondPerson.', '.$primPerson.', '.'35123'.')';
-
-		$err=mysql_query($activeA);
-
-		$err=$err.mysql_query($activeB);
-
 		mysql_close($con);
-		echo $err;
+		return $returnMsg;
 	}
+
 }
 ?>

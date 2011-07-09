@@ -16,13 +16,13 @@ $a[]="Elizabeth";
 $a[]="Ellen";
 $a[]="Wenche";
 $a[]="Vicky";
-
+session_start();
 //get the q parameter from URL
 $q=$_GET["q"];
 $uid=$_GET["user"];
 $response="";
 $db=new db_interact();
-//echo $uid;
+
 if (strlen($q) > 0)
 {
 	$delimiter=",";
@@ -30,10 +30,13 @@ if (strlen($q) > 0)
 	foreach ( $splitcontents as $id )
 	{
 		$counter = $counter+1;
-$response=$response.",".$id;
-		//echo "<b>Split $counter: </b> $id<br>";
-		//$response=$response.$db->saveRelation('12', $id);
-$db->saveRecord($uid,$id);		
+		$response=$db->saveRecord($uid,$id);
+		if($response==4){
+			$apprequest_url ="https://graph.facebook.com/" . 
+			$id. "/apprequests?message=’INSERT_UT8_STRING_MSG’" . "&data=’INSERT_STRING_DATA’&"  .
+			 $_SESSION["appReqToken"]."&method=post";
+			$result = file_get_contents($apprequest_url);
+		}
 	}
 }
 
