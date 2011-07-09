@@ -47,7 +47,7 @@ $_SESSION['views'] = 1; // store session data
 $session =$_SESSION;
 $session["fb"] = $facebook;
 $_SESSION["uid"]=$user;
-$session["appToken"] = $app_access_token;
+$session["appReqToken"] = $app_access_token;
 
 ?>
 <!doctype html>
