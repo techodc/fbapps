@@ -1,6 +1,7 @@
 <?php
 require './src/facebook.php';
 require './src/DBManager.php';
+require './RelController.php';
 
 $appId='177813092274900';
 $secret='e2a5525597622b3745f64dbe0bc4ae50';
@@ -13,6 +14,7 @@ $facebook = new Facebook(array(
 // User ID
 $user = $facebook->getUser();
 $db=new db_interact();
+$relCont= new rel_controller();
 // if logged in
 if ($user) {
 	try {
@@ -48,7 +50,7 @@ $session =$_SESSION;
 $session["fb"] = $facebook;
 $_SESSION["uid"]=$user;
 $session["appReqToken"] = $app_access_token;
-
+$existCrushes=$relCont->getCrushes($user);
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -62,8 +64,17 @@ $session["appReqToken"] = $app_access_token;
 <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.12.custom.min.js"></script>
 <script type="text/javascript" src="js/jquery.tokeninput.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
+
+$(document).ready(function() {
+	$('#crushed').dataTable( {
+		"bProcessing": true,
+		"bServerSide": true,
+		"sAjaxSource": "./crushes.php"
+	} );
+} );
 function saveCrushes(){
 
 	var crushFrn=document.getElementById("frn-list").value;
@@ -165,23 +176,36 @@ h1 a:hover {
 				</form>
 
 				<p>Tab 3b.</p>
-				<a href="javascript:attach_file( 'javascript.php' )">What time is
-					it?</a> <br> <br> <span id="dynamic_span" />
+				<div id="dynamic"> 
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="crushed"> 
+	<thead> 
+		<tr> 
+			<th width="85%">Friend Name</th> 		 
+					</tr> 
+	<?php
+while($row=mysql_fetch_array($existCrushes)){
+echo "</td><td>";
+echo $row['PrimaryConn'];
+echo "</td><td>";
+echo $row['SecondaryConn'];
+echo "</td></tr>";
+}
+echo "</table>";
+?>
+	</thead> 
+	<tbody> 
+		<tr> 
+			<td colspan="5" class="dataTables_empty">Loading data from server</td> 
+		</tr> 
+	</tbody> 
+	<tfoot> 
+		 
+	</tfoot> 
+</table> 
+			</div> 
+	<span id="dynamic_span" />
 			</div>
 		</div>
 	</div>
-
-	<?php
-	if($db){
-		echo 'connection available';
-		$id=$user;
-		$name=$user_profile[name];
-		echo 'id'.$id;
-		echo 'name  '.$name;
-	//	$db->saveRecord();
-	}
-	else
-	echo 'null connection';
-	?>
 </body>
 </html>

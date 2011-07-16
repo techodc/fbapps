@@ -21,6 +21,7 @@ class db_interact
 
 	}
 	public function saveRecord($primPerson, $secondPerson){
+		//primperson is the one who completes the relatoin. secondperson is the one who has started the relation.s
 		$con = mysql_connect("techodc.db.8009021.hostedresource.com","techodc","accORA@8");
 		$returnMsg=0;
 		mysql_select_db("my_db", $con);
@@ -52,13 +53,30 @@ class db_interact
 			$returnMsg=3;
 		}
 		else{
-				
-			//insert into relation and send notification
+			$maxFullRelId="Select max(FullRelationId) from techodc.Relations";
+			$maxIdResult=mysql_query($maxFullRelId);
+			$row = mysql_fetch_row($maxIdResult);
+			$max =$row[0]; // max value
+			
+			$insertRel="INSERT INTO techodc.Relations (FullRelationId,PrimaryConn, SecondaryConn)
+							VALUES ('.$max.','.$primPerson.', '.$secondPerson.')";	
+			mysql_query($insertRel);
 			$returnMsg=4;
 		}
 		mysql_close($con);
 		return $returnMsg;
 	}
 
+	public function getCrushes($userId){
+		$con = mysql_connect("techodc.db.8009021.hostedresource.com","techodc","accORA@8");
+		$returnMsg=0;
+		mysql_select_db("my_db", $con);
+
+		$crushes="Select * from techodc.Active_main where PrimaryConn=".$userId;
+
+		$result=mysql_query($crushes);
+		$num_rows = mysql_num_rows($result);
+		return $result;
+	} 
 }
 ?>
