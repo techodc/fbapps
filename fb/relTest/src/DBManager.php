@@ -57,7 +57,7 @@ class db_interact
 			$maxIdResult=mysql_query($maxFullRelId);
 			$row = mysql_fetch_row($maxIdResult);
 			$max =$row[0]; // max value
-			
+				
 			$insertRel="INSERT INTO techodc.Relations (FullRelationId,PrimaryConn, SecondaryConn)
 							VALUES ('.$max.','.$primPerson.', '.$secondPerson.')";	
 			mysql_query($insertRel);
@@ -77,6 +77,36 @@ class db_interact
 		$result=mysql_query($crushes);
 		$num_rows = mysql_num_rows($result);
 		return $result;
-	} 
+	}
+
+	public function getRelations($userId){
+		$con = mysql_connect("techodc.db.8009021.hostedresource.com","techodc","accORA@8");
+		$returnMsg=0;
+		mysql_select_db("my_db", $con);
+
+		$rln="Select * from techodc.Relations where PrimaryConn=".$userId." OR SecondaryConn=".$userId;
+
+		$result=mysql_query($rln);
+		$num_rows = mysql_num_rows($result);
+/*
+		$i=0;
+		$showRln;
+		while($row=mysql_fetch_array($result)){
+			foreach($friends as $key=>$value){
+				foreach ($value as $fkey=>$fvalue) {
+					if($fvalue[id]==$row['SecondaryConn']){
+						$facebookUrl = "https://graph.facebook.com/".$row['SecondaryConn'];
+						$str = file_get_contents($facebookUrl);
+						$result = json_decode($str);
+						$showRln[$i]= $result->name;
+						$i=$i+1;
+						continue;
+					}
+				}}}
+		return $showRln;
+	*/
+		return $result;
+	}
+
 }
 ?>
