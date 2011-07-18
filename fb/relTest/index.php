@@ -40,27 +40,51 @@ $token_url = "https://graph.facebook.com/oauth/access_token?" .
     "&client_secret=" .$secret.
     "&grant_type=client_credentials";
 
-  $app_access_token = file_get_contents($token_url);
+$app_access_token = file_get_contents($token_url);
 
-  session_start(); 
+session_start();
 $_SESSION['views'] = 1; // store session data
 //echo "Pageviews = ". $_SESSION['views']; //retrieve data
-  
+
 $session =$_SESSION;
 $session["fb"] = $facebook;
 $_SESSION["uid"]=$user;
 $session["appReqToken"] = $app_access_token;
 $existCrushes=$relCont->getCrushes($user);
+$existRln=$relCont->getRelations($user);
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="Stylesheet" href="css/ui-darkness/jquery-ui-1.8.12.custom.css" type="text/css"/>
+<link rel="Stylesheet"
+	href="css/ui-darkness/jquery-ui-1.8.12.custom.css" type="text/css" />
 <link rel="stylesheet" href="css/token-input.css" type="text/css" />
-<link rel="stylesheet" href="css/token-input-facebook.css" type="text/css" />
+<link rel="stylesheet" href="css/token-input-facebook.css"
+	type="text/css" />
+<link rel="stylesheet" href="tablecloth.css" type="text/css" />
+<style type="text/css" media="screen, print, projection">
+#wrap {
+	width: 750px;
+	margin: 0 auto;
+	background: #99c;
+}
 
+#crushes {
+	float: left;
+	width: 480px;
+	padding: 10px;
+	background: #9c9;
+}
+
+#reln {
+	float: right;
+	width: 230px;
+	padding: 10px;
+	background: #99c;
+}
+</style>
 <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.12.custom.min.js"></script>
 <script type="text/javascript" src="js/jquery.tokeninput.js"></script>
@@ -68,13 +92,6 @@ $existCrushes=$relCont->getCrushes($user);
 
 <script type="text/javascript">
 
-$(document).ready(function() {
-	$('#crushed').dataTable( {
-		"bProcessing": true,
-		"bServerSide": true,
-		"sAjaxSource": "./crushes.php"
-	} );
-} );
 function saveCrushes(){
 
 	var crushFrn=document.getElementById("frn-list").value;
@@ -136,19 +153,20 @@ h1 a:hover {
 							<h3>
 								Welcome <br>
 								<?php echo $user_profile[first_name] ?>
-							</h3> 
-							<img src="https://graph.facebook.com/<?php echo $user; ?>/picture">
+							</h3> <img
+							src="https://graph.facebook.com/<?php echo $user; ?>/picture">
 						</td>
 						<td><?php $friends = $facebook->api('/me/friends');?> <?php endif;?>
 							<h2>Select Friends on which You have crushes</h2>
 							<div>
-								<input type="text" id="frn-list" name="blah" /> 
-								<input type="button" value="Submit" onclick="saveCrushes();" />
-								<p>Suggestions: <span id="status"></span></p>
+								<input type="text" id="frn-list" name="blah" /> <input
+									type="button" value="Submit" onclick="saveCrushes();" />
+								<p>
+									Suggestions: <span id="status"></span>
+								</p>
 								<script type="text/javascript">
         $(document).ready(function() {
             $("#frn-list").tokenInput([
-
 <?php foreach($friends as $key=>$value){ 
 	foreach ($value as $fkey=>$fvalue) {?>
 {id:<?=$fvalue[id]?>, name: "<?=$fvalue[name]?>"},
@@ -162,48 +180,84 @@ h1 a:hover {
 
 			</div>
 			<div id="tabs-3">
-				<p>Tab 3 a.</p>
-				<form name="ftest">
-					<ul>
-						<li><input type="text" size="6" id="var1" name="var1" /> * <input
-							type="text" size="6" id="var2" name="var2" /> = <input
-							type="text" id="result" name="result" size="20" /> <input
-							type="button"
-							onsubmit="$('#result').val($.x_page_multiply($('#var1').val(),$('#var2').val()))"
-							title="No action, just to triger onchange event in previous field"
-							value="Count" /></li>
-					</ul>
-				</form>
 
-				<p>Tab 3b.</p>
-				<div id="dynamic"> 
-<table cellpadding="0" cellspacing="0" border="0" class="display" id="crushed"> 
-	<thead> 
-		<tr> 
-			<th width="85%">Friend Name</th> 		 
-					</tr> 
-	<?php
-while($row=mysql_fetch_array($existCrushes)){
-echo "</td><td>";
-echo $row['PrimaryConn'];
-echo "</td><td>";
-echo $row['SecondaryConn'];
-echo "</td></tr>";
-}
-echo "</table>";
-?>
-	</thead> 
-	<tbody> 
-		<tr> 
-			<td colspan="5" class="dataTables_empty">Loading data from server</td> 
-		</tr> 
-	</tbody> 
-	<tfoot> 
-		 
-	</tfoot> 
-</table> 
-			</div> 
-	<span id="dynamic_span" />
+			<?php
+		 $i=0;
+		 $showCrush;
+		 $showRln;
+		 while($row=mysql_fetch_array($existCrushes)){
+		 	foreach($friends as $key=>$value){
+		 		foreach ($value as $fkey=>$fvalue) {
+						if($fvalue[id]==$row['SecondaryConn']){
+							$facebookUrl = "https://graph.facebook.com/".$row['SecondaryConn'];
+							$str = file_get_contents($facebookUrl);
+							$result = json_decode($str);
+							$showCrush[$i]= $result->name;
+							$i=$i+1;
+							continue;
+						}
+		 		}}}
+
+		 		while($row=mysql_fetch_array($existRln)){
+		 			foreach($friends as $key=>$value){
+		 				foreach ($value as $fkey=>$fvalue) {
+		 					if($fvalue[id]==$row['SecondaryConn']){
+		 						$facebookUrl = "https://graph.facebook.com/".$row['SecondaryConn'];
+		 						$str = file_get_contents($facebookUrl);
+		 						$result = json_decode($str);
+		 						$showRln[$i]= $result->name;
+		 						$i=$i+1;
+		 						continue;
+		 					}
+		 				}}}
+		 				echo $showRln;
+		 				?>
+				<div id="wrap">
+					<div id="crushes">
+						<table name="test" cellpadding="0" cellspacing="0" border="0"
+							class="tabledisplay" id="crushed">
+							<thead>
+								<tr>
+									<th width="85%">Friend Name</th>
+								</tr>
+							</thead>
+							<tbody>
+							<?php
+							foreach ($showCrush as &$value) {
+								echo "</td><td>";
+								echo $value;
+								echo "</td></tr>";
+							}
+							echo "</table>";
+							?>
+							</tbody>
+							<tfoot>
+							</tfoot>
+						</table>
+					</div>
+					<div id="reln">
+						<table name="test2" cellpadding="0" cellspacing="0" border="0"
+							class="tabledisplay" id="crushed">
+							<thead>
+								<tr>
+									<th width="85%">Friend Name</th>
+								</tr>
+							</thead>
+							<tbody>
+							<?php
+							foreach ($showRln as &$value1) {
+								echo "</td><td>";
+								echo $value1;
+								echo "</td></tr>";
+							}
+							echo "</table>";
+							?>
+							</tbody>
+							<tfoot>
+							</tfoot>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
